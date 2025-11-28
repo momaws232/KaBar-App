@@ -17,21 +17,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingData(
       title: 'Stay Updated with Finance',
       description: 'Get the latest news on crypto, stocks, and financial markets all in one place.',
-      icon: Icons.currency_bitcoin,
+      imagePath: 'assets/images/unsplashnrtlz5d2ap8.png',
       color: const Color(0xFFFF9F43),
       bgColor: const Color(0xFF2C3E50),
     ),
     OnboardingData(
       title: 'Discover Travel & Culture',
       description: 'Explore amazing destinations, cultural insights, and travel guides from around the world.',
-      icon: Icons.temple_buddhist,
+      imagePath: 'assets/images/unsplash1kdig_258bu.png',
       color: const Color(0xFF00D2FF),
       bgColor: const Color(0xFF3867D6),
     ),
     OnboardingData(
       title: 'Health & Lifestyle Tips',
       description: 'Get expert advice on nutrition, wellness, and living your best healthy life.',
-      icon: Icons.restaurant,
+      imagePath: 'assets/images/image_1.png',
       color: const Color(0xFF26DE81),
       bgColor: const Color(0xFF20BF6B),
     ),
@@ -163,19 +163,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Hero image section with 3D effect
+          // Hero image section with actual photo
           Container(
             height: 400,
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  data.bgColor,
-                  data.bgColor.withOpacity(0.7),
-                ],
-              ),
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
@@ -185,57 +177,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ],
             ),
-            child: Stack(
-              children: [
-                // Decorative shapes
-                Positioned(
-                  top: 30,
-                  left: 30,
-                  child: Container(
-                    width: 80,
-                    height: 80,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Image.asset(
+                data.imagePath,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
                     decoration: BoxDecoration(
-                      color: data.color.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          data.bgColor,
+                          data.bgColor.withOpacity(0.7),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 40,
-                  right: 40,
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(20),
+                    child: Center(
+                      child: Icon(
+                        Icons.image,
+                        size: 80,
+                        color: Colors.white.withOpacity(0.5),
+                      ),
                     ),
-                  ),
-                ),
-                // Main icon
-                Center(
-                  child: Container(
-                    width: 140,
-                    height: 140,
-                    decoration: BoxDecoration(
-                      color: data.color,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: data.color.withOpacity(0.5),
-                          blurRadius: 20,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      data.icon,
-                      size: 70,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
           
@@ -274,14 +242,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 class OnboardingData {
   final String title;
   final String description;
-  final IconData icon;
+  final String imagePath;
   final Color color;
   final Color bgColor;
 
   OnboardingData({
     required this.title,
     required this.description,
-    required this.icon,
+    required this.imagePath,
     required this.color,
     required this.bgColor,
   });
