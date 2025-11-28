@@ -1,3 +1,2 @@
-# app_training
+# Assignment Training
 
-A new Flutter project.
