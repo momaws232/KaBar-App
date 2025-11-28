@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'onboarding_screen.dart';
-import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -31,17 +29,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     
     _animationController.forward();
     
-    // Check if onboarding is complete and navigate accordingly
+    // Navigate to onboarding after splash
     Timer(const Duration(seconds: 3), () async {
-      final prefs = await SharedPreferences.getInstance();
-      final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
-      
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => onboardingComplete 
-                ? const LoginScreen() 
-                : const OnboardingScreen(),
+            builder: (context) => const OnboardingScreen(),
           ),
         );
       }
@@ -57,7 +50,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,

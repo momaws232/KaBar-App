@@ -22,14 +22,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: isDark ? Colors.grey[850] : Colors.white,
         elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black87),
+            icon: Icon(Icons.menu, color: Theme.of(context).iconTheme.color),
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
@@ -70,11 +71,11 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: Colors.black87),
+            icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Colors.black87),
+            icon: Icon(Icons.notifications_outlined, color: Theme.of(context).iconTheme.color),
             onPressed: () {},
           ),
         ],
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> {
       
       drawer: Drawer(
         child: Container(
-          color: Colors.white,
+          color: isDark ? Colors.grey[850] : Colors.white,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           'Ka',
                           style: TextStyle(
                             fontSize: 32,
@@ -115,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.blue[700],
                           ),
                         ),
-                        Text(
+                        const Text(
                           'ar',
                           style: TextStyle(
                             fontSize: 32,
@@ -197,7 +198,7 @@ class _HomePageState extends State<HomePage> {
           // Category Tabs
           Container(
             height: 50,
-            color: Colors.white,
+            color: isDark ? Colors.grey[850] : Colors.white,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -214,10 +215,10 @@ class _HomePageState extends State<HomePage> {
                         _selectedCategory = index;
                       });
                     },
-                    backgroundColor: Colors.grey[100],
+                    backgroundColor: isDark ? Colors.grey[800] : Colors.grey[100],
                     selectedColor: Colors.blue[700],
                     labelStyle: TextStyle(
-                      color: isSelected ? Colors.white : Colors.black87,
+                      color: isSelected ? Colors.white : (isDark ? Colors.grey[300] : Colors.black87),
                       fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -227,7 +228,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           
-          Divider(height: 1, color: Colors.grey[300]),
+          Divider(height: 1, color: isDark ? Colors.grey[700] : Colors.grey[300]),
           
           // News Feed
           Expanded(
@@ -251,7 +252,7 @@ class _HomePageState extends State<HomePage> {
         },
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue[700],
-        unselectedItemColor: Colors.grey[600],
+        unselectedItemColor: isDark ? Colors.grey[400] : Colors.grey[600],
         showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
@@ -276,6 +277,7 @@ class _HomePageState extends State<HomePage> {
   }
   
   Widget _buildNewsCard(int index) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final newsTypes = [
       {'category': 'Finance', 'icon': Icons.attach_money, 'color': Colors.orange},
       {'category': 'Travel', 'icon': Icons.flight_takeoff, 'color': Colors.blue},
@@ -347,10 +349,10 @@ class _HomePageState extends State<HomePage> {
                 // News Title
                 Text(
                   'Breaking: Latest ${news['category']} News Update ${index + 1}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
                 ),
                 
@@ -361,7 +363,7 @@ class _HomePageState extends State<HomePage> {
                   'This is a preview of the article content. Get the latest updates and in-depth coverage of ${news['category']} news from around the world.',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey[600],
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
                     height: 1.5,
                   ),
                   maxLines: 2,
@@ -375,11 +377,11 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     CircleAvatar(
                       radius: 12,
-                      backgroundColor: Colors.grey[300],
+                      backgroundColor: isDark ? Colors.grey[700] : Colors.grey[300],
                       child: Icon(
                         Icons.person,
                         size: 16,
-                        color: Colors.grey[600],
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -387,25 +389,25 @@ class _HomePageState extends State<HomePage> {
                       'Author Name',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey[700],
+                        color: isDark ? Colors.grey[400] : Colors.grey[700],
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     const Spacer(),
-                    Icon(Icons.access_time, size: 14, color: Colors.grey[600]),
+                    Icon(Icons.access_time, size: 14, color: isDark ? Colors.grey[400] : Colors.grey[600]),
                     const SizedBox(width: 4),
                     Text(
                       '${index + 1}h ago',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey[600],
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
                       ),
                     ),
                     const SizedBox(width: 12),
                     IconButton(
                       icon: const Icon(Icons.bookmark_border),
                       iconSize: 20,
-                      color: Colors.grey[600],
+                      color: isDark ? Colors.grey[400] : Colors.grey[600],
                       onPressed: () {},
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),

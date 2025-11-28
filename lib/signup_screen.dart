@@ -39,8 +39,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -62,32 +62,32 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 40),
                   
                   // Welcome Text
-                  const Text(
+                  Text(
                     'Hello!',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: Theme.of(context).textTheme.headlineLarge?.color,
                     ),
                   ),
-                  const Text(
+                  Text(
                     'Signup to get Started',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: Theme.of(context).textTheme.headlineLarge?.color,
                     ),
                   ),
                   
                   const SizedBox(height: 40),
                   
                   // Username Field
-                  const Text(
+                  Text(
                     'Username',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -95,9 +95,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _usernameController,
                     decoration: InputDecoration(
                       hintText: 'Enter your username',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: TextStyle(color: isDark ? Colors.grey[500] : Colors.grey[400]),
                       filled: true,
-                      fillColor: Colors.grey[100],
+                      fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -137,12 +137,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 20),
                   
                   // Email Field
-                  const Text(
+                  Text(
                     'Email',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -151,9 +151,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: TextStyle(color: isDark ? Colors.grey[500] : Colors.grey[400]),
                       filled: true,
-                      fillColor: Colors.grey[100],
+                      fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -193,12 +193,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 20),
                   
                   // Password Field
-                  const Text(
+                  Text(
                     'Password',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -207,9 +207,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     obscureText: !_isPasswordVisible,
                     decoration: InputDecoration(
                       hintText: 'Enter your password',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: TextStyle(color: isDark ? Colors.grey[500] : Colors.grey[400]),
                       filled: true,
-                      fillColor: Colors.grey[100],
+                      fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -239,7 +239,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           _isPasswordVisible
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
-                          color: Colors.grey[600],
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
                         onPressed: () {
                           setState(() {
@@ -290,14 +290,14 @@ class _SignupScreenState extends State<SignupScreen> {
                   // Or Continue With
                   Row(
                     children: [
-                      Expanded(child: Divider(color: Colors.grey[300])),
+                      Expanded(child: Divider(color: isDark ? Colors.grey[700] : Colors.grey[300])),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           'Or continue with',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.grey[600],
+                            color: isDark ? Colors.grey[400] : Colors.grey[600],
                           ),
                         ),
                       ),
@@ -314,10 +314,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: OutlinedButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.facebook, color: Colors.blue),
-                          label: const Text(
+                          label: Text(
                             'Facebook',
                             style: TextStyle(
-                              color: Colors.black87,
+                              color: Theme.of(context).textTheme.bodyMedium?.color,
                               fontSize: 14,
                             ),
                           ),
@@ -326,7 +326,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            side: BorderSide(color: Colors.grey[300]!),
+                            side: BorderSide(color: isDark ? Colors.grey[700]! : Colors.grey[300]!),
                           ),
                         ),
                       ),
@@ -335,10 +335,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: OutlinedButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.g_mobiledata, color: Colors.red, size: 28),
-                          label: const Text(
+                          label: Text(
                             'Google',
                             style: TextStyle(
-                              color: Colors.black87,
+                              color: Theme.of(context).textTheme.bodyMedium?.color,
                               fontSize: 14,
                             ),
                           ),
@@ -347,7 +347,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            side: BorderSide(color: Colors.grey[300]!),
+                            side: BorderSide(color: isDark ? Colors.grey[700]! : Colors.grey[300]!),
                           ),
                         ),
                       ),
@@ -364,7 +364,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         'Already have an account? ',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey[700],
+                          color: isDark ? Colors.grey[400] : Colors.grey[700],
                         ),
                       ),
                       TextButton(

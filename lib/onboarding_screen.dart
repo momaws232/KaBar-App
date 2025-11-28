@@ -31,7 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingData(
       title: 'Health & Lifestyle Tips',
       description: 'Get expert advice on nutrition, wellness, and living your best healthy life.',
-      imagePath: 'assets/images/image_1.png',
+      imagePath: 'assets/images/frame_207.png',
       color: const Color(0xFF26DE81),
       bgColor: const Color(0xFF20BF6B),
     ),
@@ -57,8 +57,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -92,7 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         decoration: BoxDecoration(
                           color: _currentPage == index
                               ? Colors.blue[700]
-                              : Colors.grey[300],
+                              : (isDark ? Colors.grey[700] : Colors.grey[300]),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -144,7 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         'Skip',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey[600],
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
                       ),
                     ),
@@ -158,83 +159,77 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildPage(OnboardingData data) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Hero image section with actual photo
-          Container(
-            height: 400,
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Column(
+      children: [
+        // Top half - Image
+        Expanded(
+          flex: 1,
+          child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              boxShadow: [
-                BoxShadow(
-                  color: data.bgColor.withOpacity(0.3),
-                  blurRadius: 30,
-                  offset: const Offset(0, 10),
-                ),
-              ],
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  data.bgColor,
+                  data.bgColor.withOpacity(0.8),
+                ],
+              ),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
+            child: ClipRect(
               child: Image.asset(
                 data.imagePath,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          data.bgColor,
-                          data.bgColor.withOpacity(0.7),
-                        ],
-                      ),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.image,
-                        size: 80,
-                        color: Colors.white.withOpacity(0.5),
-                      ),
+                  return Center(
+                    child: Icon(
+                      Icons.image,
+                      size: 80,
+                      color: Colors.white.withOpacity(0.5),
                     ),
                   );
                 },
               ),
             ),
           ),
-          
-          const SizedBox(height: 50),
-          
-          Text(
-            data.title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+        ),
+        
+        // Bottom half - Content
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 40.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  data.title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                
+                const SizedBox(height: 16),
+                
+                Text(
+                  data.description,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
+                    height: 1.6,
+                  ),
+                ),
+              ],
             ),
           ),
-          
-          const SizedBox(height: 16),
-          
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              data.description,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.grey[600],
-                height: 1.6,
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

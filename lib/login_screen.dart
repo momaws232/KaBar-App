@@ -36,8 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     'Welcome back you\'ve\nbeen missed!',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color: isDark ? Colors.grey[400] : Colors.grey[600],
                       height: 1.5,
                     ),
                   ),
@@ -88,12 +88,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 40),
                   
                   // Username/Email Field
-                  const Text(
+                  Text(
                     'Username',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -102,9 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       hintText: 'Enter your username',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: TextStyle(color: isDark ? Colors.grey[500] : Colors.grey[400]),
                       filled: true,
-                      fillColor: Colors.grey[100],
+                      fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -136,12 +136,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 20),
                   
                   // Password Field
-                  const Text(
+                  Text(
                     'Password',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -150,9 +150,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     obscureText: !_isPasswordVisible,
                     decoration: InputDecoration(
                       hintText: 'Enter your password',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: TextStyle(color: isDark ? Colors.grey[500] : Colors.grey[400]),
                       filled: true,
-                      fillColor: Colors.grey[100],
+                      fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           _isPasswordVisible
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
-                          color: Colors.grey[600],
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
                         onPressed: () {
                           setState(() {
@@ -219,11 +219,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           const SizedBox(width: 8),
-                          const Text(
+                          Text(
                             'Remember Me',
                             style: TextStyle(
                               fontSize: 13,
-                              color: Colors.black87,
+                              color: Theme.of(context).textTheme.bodyMedium?.color,
                             ),
                           ),
                         ],
@@ -280,18 +280,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Or Continue With
                   Row(
                     children: [
-                      Expanded(child: Divider(color: Colors.grey[300])),
+                      Expanded(child: Divider(color: isDark ? Colors.grey[700] : Colors.grey[300])),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           'Or continue with',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.grey[600],
+                            color: isDark ? Colors.grey[400] : Colors.grey[600],
                           ),
                         ),
                       ),
-                      Expanded(child: Divider(color: Colors.grey[300])),
+                      Expanded(child: Divider(color: isDark ? Colors.grey[700] : Colors.grey[300])),
                     ],
                   ),
                   
@@ -308,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            side: BorderSide(color: Colors.grey[300]!),
+                            side: BorderSide(color: isDark ? Colors.grey[700]! : Colors.grey[300]!),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -319,10 +319,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: 20,
                               ),
                               const SizedBox(width: 8),
-                              const Text(
+                              Text(
                                 'Facebook',
                                 style: TextStyle(
-                                  color: Colors.black87,
+                                  color: Theme.of(context).textTheme.bodyMedium?.color,
                                   fontSize: 14,
                                 ),
                               ),
@@ -339,17 +339,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            side: BorderSide(color: Colors.grey[300]!),
+                            side: BorderSide(color: isDark ? Colors.grey[700]! : Colors.grey[300]!),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(Icons.g_mobiledata, color: Colors.red, size: 28),
                               const SizedBox(width: 4),
-                              const Text(
+                              Text(
                                 'Google',
                                 style: TextStyle(
-                                  color: Colors.black87,
+                                  color: Theme.of(context).textTheme.bodyMedium?.color,
                                   fontSize: 14,
                                 ),
                               ),
@@ -370,7 +370,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Don\'t have an account? ',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey[700],
+                          color: isDark ? Colors.grey[400] : Colors.grey[700],
                         ),
                       ),
                       TextButton(

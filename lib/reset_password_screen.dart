@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'login_screen.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -49,11 +48,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              const Text(
+              Text(
                 'Congratulations!',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.headlineSmall?.color,
                 ),
               ),
               const SizedBox(height: 12),
@@ -62,7 +62,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.grey[600],
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.grey[400] : Colors.grey[600],
                 ),
               ),
               const SizedBox(height: 24),
@@ -104,13 +104,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -124,28 +124,21 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: [
                 const SizedBox(height: 20),
                 
-                  // Logo - KaBar
-                  SvgPicture.asset(
-                    'assets/images/vector_6.svg',
-                    height: 50,
-                    width: 120,
-                  ),                const SizedBox(height: 40),
-                
                 // Title
-                const Text(
+                Text(
                   'Reset',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).textTheme.headlineLarge?.color,
                   ),
                 ),
-                const Text(
+                Text(
                   'Password',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).textTheme.headlineLarge?.color,
                   ),
                 ),
                 
@@ -155,7 +148,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   'Create a new password for your account',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey[600],
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
                     height: 1.5,
                   ),
                 ),
@@ -163,12 +156,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(height: 40),
                 
                 // New Password Field
-                const Text(
+                Text(
                   'New Password',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -177,9 +170,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   obscureText: !_isNewPasswordVisible,
                   decoration: InputDecoration(
                     hintText: 'Enter new password',
-                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    hintStyle: TextStyle(color: isDark ? Colors.grey[500] : Colors.grey[400]),
                     filled: true,
-                    fillColor: Colors.grey[100],
+                    fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide.none,
@@ -201,7 +194,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         _isNewPasswordVisible
                             ? Icons.visibility_outlined
                             : Icons.visibility_off_outlined,
-                        color: Colors.grey[600],
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
                       ),
                       onPressed: () {
                         setState(() {
@@ -224,12 +217,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(height: 20),
                 
                 // Confirm Password Field
-                const Text(
+                Text(
                   'Confirm Password',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -238,9 +231,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   obscureText: !_isConfirmPasswordVisible,
                   decoration: InputDecoration(
                     hintText: 'Re-enter new password',
-                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    hintStyle: TextStyle(color: isDark ? Colors.grey[500] : Colors.grey[400]),
                     filled: true,
-                    fillColor: Colors.grey[100],
+                    fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide.none,
@@ -262,7 +255,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         _isConfirmPasswordVisible
                             ? Icons.visibility_outlined
                             : Icons.visibility_off_outlined,
-                        color: Colors.grey[600],
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
                       ),
                       onPressed: () {
                         setState(() {

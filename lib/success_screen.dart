@@ -15,7 +15,6 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -52,10 +51,10 @@ class SuccessScreen extends StatelessWidget {
                 // Title
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).textTheme.headlineLarge?.color,
                   ),
                 ),
                 
@@ -69,7 +68,7 @@ class SuccessScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
-                      color: Colors.grey[600],
+                      color: Theme.of(context).brightness == Brightness.dark ? Colors.grey[400] : Colors.grey[600],
                       height: 1.5,
                     ),
                   ),

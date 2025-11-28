@@ -89,13 +89,13 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -108,12 +108,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
               const SizedBox(height: 20),
               
               // Title
-              const Text(
+              Text(
                 'OTP Verification',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Theme.of(context).textTheme.headlineLarge?.color,
                 ),
               ),
               
@@ -123,7 +123,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 text: TextSpan(
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey[600],
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
                     height: 1.5,
                   ),
                   children: [
@@ -161,7 +161,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                       decoration: InputDecoration(
                         counterText: '',
                         filled: true,
-                        fillColor: Colors.grey[100],
+                        fillColor: isDark ? Colors.grey[850] : Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -210,7 +210,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                         'Resend code in $_remainingSeconds s',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey[600],
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
                       )
                     : TextButton(
